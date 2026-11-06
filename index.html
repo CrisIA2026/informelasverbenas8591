@@ -3,776 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INFORME DE OPTIMIZACIÓN DE GESTIÓN - Edificio Las Verbenas #8591</title>
-    <!-- Tailwind CSS -->
+    <title>Informe de Optimización de Gestión - Edificio Las Verbenas #8591</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        navy: {
-                            50: '#f0f4f8',
-                            100: '#d9e2ec',
-                            700: '#102a43',
-                            800: '#0b69a3',
-                            900: '#0f172a',
-                        },
-                        emerald: {
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #064e3b 100%);
-        }
-        .card-shadow {
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 9999px;
-        }
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased leading-relaxed">
 
-    <!-- ENCABEZADO PRINCIPAL Y MÉTRICAS KEY -->
-    <header class="gradient-header text-white pt-8 pb-16 px-4 sm:px-8 border-b border-slate-700 shadow-xl relative overflow-hidden">
-        <div class="absolute -right-12 -top-12 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <!-- Header / Banner -->
+    <header class="bg-slate-900 text-white border-b-4 border-blue-600">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-3 border border-emerald-500/30">
-                        <i class="fa-solid fa-chart-line"></i> Informe Ejecutivo de Optimización Digital
-                    </div>
-                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                        INFORME DE OPTIMIZACIÓN DE GESTIÓN, INFORMACIÓN Y RECURSOS
-                    </h1>
-                    <p class="text-emerald-300 font-extrabold text-lg sm:text-xl mt-2 tracking-wide">
-                        Plan de adopción standard de la plataforma “Comunidad Feliz”
-                    </p>
-                    <p class="text-slate-300 mt-2 text-sm sm:text-base flex flex-wrap items-center gap-2 font-medium">
-                        <i class="fa-solid fa-building text-emerald-400"></i> Administración Edificio Las Verbenas #8591 
-                        <span class="text-slate-400">•</span> 
-                        <span class="text-emerald-300 font-semibold">99 Unidades (Las Condes)</span>
-                        <span class="text-slate-400">•</span>
-                        <span class="text-slate-200">Gasto Mensual Software: $82.315 CLP</span>
-                    </p>
+                    <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Documento Ejecutivo</span>
+                    <h1 class="text-2xl md:text-3xl font-extrabold mt-2 tracking-tight">Plan de adopción standard de la plataforma “Comunidad Feliz”</h1>
+                    <p class="text-slate-400 text-sm mt-1">Condominio Edificio Las Verbenas #8591 — Las Condes</p>
                 </div>
-                <div class="flex flex-wrap items-center gap-3">
-                    <button onclick="window.print()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-sm font-semibold transition flex items-center gap-2 border border-slate-600 shadow-sm">
-                        <i class="fa-solid fa-print"></i> Imprimir / Guardar PDF
-                    </button>
-                    <button onclick="openModal('modalNotificacion')" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-lg shadow-emerald-900/30">
-                        <i class="fa-solid fa-envelope"></i> Solicitud para Administración
-                    </button>
-                </div>
-            </div>
-
-            <!-- TARJETAS DE MÉTRICAS EJECUTIVAS -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 p-5 rounded-2xl shadow-sm">
-                    <div class="flex items-center justify-between text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">
-                        <span>Costo Mensual Real</span>
-                        <i class="fa-solid fa-receipt text-blue-400"></i>
-                    </div>
-                    <div class="text-2xl font-bold text-white">$82.315 <span class="text-xs font-normal text-slate-400">/mes</span></div>
-                    <div class="text-xs text-slate-400 mt-1">$987.780 CLP abonados al año</div>
-                </div>
-
-                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 p-5 rounded-2xl shadow-sm">
-                    <div class="flex items-center justify-between text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">
-                        <span>Uso Actual Estimado</span>
-                        <i class="fa-solid fa-gauge-simple-high text-amber-400"></i>
-                    </div>
-                    <div class="text-2xl font-bold text-amber-400" id="kpiUsageRate">20%</div>
-                    <div class="text-xs text-slate-400 mt-1">Limitado a cálculo y cuadre básico</div>
-                </div>
-
-                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 p-5 rounded-2xl shadow-sm">
-                    <div class="flex items-center justify-between text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">
-                        <span>Pérdida Anual Directa</span>
-                        <i class="fa-solid fa-arrow-trend-down text-rose-400"></i>
-                    </div>
-                    <div class="text-2xl font-bold text-rose-400" id="kpiAnnualLoss">$790.224</div>
-                    <div class="text-xs text-slate-400 mt-1">80% de recursos desaprovechados</div>
-                </div>
-
-                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 p-5 rounded-2xl shadow-sm">
-                    <div class="flex items-center justify-between text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">
-                        <span>Módulos Clave Inactivos</span>
-                        <i class="fa-solid fa-scale-balanced text-emerald-400"></i>
-                    </div>
-                    <div class="text-base font-bold text-emerald-300 truncate">Asesoría Legal + Previred</div>
-                    <div class="text-xs text-slate-400 mt-1">Soporte Ley 21.442 sin costo extra</div>
+                <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-right w-full md:w-auto">
+                    <p class="text-xs text-slate-400">Inversión Actual en Software</p>
+                    <p class="text-xl font-bold text-blue-400">$82.315 CLP <span class="text-xs font-normal text-slate-300">/ mes</span></p>
+                    <p class="text-xs text-slate-400">$987.780 CLP al año</p>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- NAUVEGACIÓN INTERACTIVA -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-8 -mt-8 mb-16 flex-grow w-full relative z-20">
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
 
-        <div class="bg-white rounded-2xl p-2 shadow-md mb-8 border border-slate-200 flex flex-wrap gap-2 overflow-x-auto custom-scrollbar">
-            <button onclick="switchTab('tab-diagnostico')" id="btn-tab-diagnostico" class="tab-btn px-5 py-3 rounded-xl text-sm font-semibold transition flex items-center gap-2 bg-slate-900 text-white shadow-sm">
-                <i class="fa-solid fa-compass-drafting"></i> Marco & Diagnóstico
-            </button>
-            <button onclick="switchTab('tab-modulos')" id="btn-tab-modulos" class="tab-btn px-5 py-3 rounded-xl text-sm font-semibold transition flex items-center gap-2 text-slate-600 hover:bg-slate-100">
-                <i class="fa-solid fa-list-check"></i> Auditoría de 10 Módulos
-            </button>
-            <button onclick="switchTab('tab-normativa')" id="btn-tab-normativa" class="tab-btn px-5 py-3 rounded-xl text-sm font-semibold transition flex items-center gap-2 text-slate-600 hover:bg-slate-100">
-                <i class="fa-solid fa-gavel"></i> Cumplimiento Ley 21.442
-            </button>
-            <button onclick="switchTab('tab-financiero')" id="btn-tab-financiero" class="tab-btn px-5 py-3 rounded-xl text-sm font-semibold transition flex items-center gap-2 text-slate-600 hover:bg-slate-100">
-                <i class="fa-solid fa-calculator"></i> Calculadora Financiera
-            </button>
-            <button onclick="switchTab('tab-hoja-ruta')" id="btn-tab-hoja-ruta" class="tab-btn px-5 py-3 rounded-xl text-sm font-semibold transition flex items-center gap-2 text-slate-600 hover:bg-slate-100">
-                <i class="fa-solid fa-route"></i> Hoja de Ruta por Etapas
-            </button>
-        </div>
-
-        <!-- PESTAÑA 1: DIAGNÓSTICO -->
-        <section id="tab-diagnostico" class="tab-content block space-y-8">
-            <div class="bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-200">
-                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2 flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center text-base font-extrabold">1</span>
-                    Marco Estratégico y Diagnóstico Operativo
-                </h2>
-                <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
-                    Este documento establece la necesidad del <strong>Plan de adopción standard de la plataforma “Comunidad Feliz”</strong>, por la cual el Edificio Las Verbenas #8591 cancela <strong>$82.315 CLP mensuales ($987.780 CLP/año)</strong> para sus <strong>99 departamentos</strong>. Es responsabilidad técnica de la administración actual aconsejar, liderar y guiar la adopción eficiente de esta herramienta, conocimiento que constituye un estándar básico hoy en día en la administración profesional de condominios.
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- PRÁCTICAS OBSOLETAS -->
-                    <div class="bg-slate-50 rounded-2xl p-6 border-2 border-slate-200 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-slate-200 text-slate-700 font-bold text-xs uppercase px-4 py-1 rounded-bl-xl">
-                            Estado Actual (Vulnerable)
-                        </div>
-                        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-hard-drive text-amber-500"></i> Almacenamiento en Pendrive / Drive Manual
-                        </h3>
-                        <ul class="space-y-4 text-sm text-slate-600">
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-1"></i>
-                                <div>
-                                    <strong class="text-slate-800">Riesgo en el Almacenamiento Principal Local:</strong>
-                                    <p class="text-xs text-slate-500 mt-0.5">Usar un pendrive o carpetas locales de Google Drive como repositorio contable único expone al condominio a pérdida de datos, virus e interrupción de la información contable.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-1"></i>
-                                <div>
-                                    <strong class="text-slate-800">Canales Desconectados (Gmail y WhatsApp):</strong>
-                                    <p class="text-xs text-slate-500 mt-0.5">Gestionar notificaciones o reclamos en correos o WhatsApp sueltos impide la trazabilidad oficial y la vinculación a la ficha histórica de cada departamento.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-1"></i>
-                                <div>
-                                    <strong class="text-slate-800">Subaprovechamiento Presupuestario (80% Pérdida):</strong>
-                                    <p class="text-xs text-slate-500 mt-0.5">Utilizar la plataforma pagada solo como una calculadora genera una pérdida anual de $790.224 que debería permanecer en el Fondo de Reserva.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- ESTÁNDAR RECOMENDADO -->
-                    <div class="bg-emerald-50/60 rounded-2xl p-6 border-2 border-emerald-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-emerald-600 text-white font-bold text-xs uppercase px-4 py-1 rounded-bl-xl">
-                            Plan Standard ComunidadFeliz
-                        </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-cloud text-emerald-600"></i> Centralización en la Nube Auditable
-                        </h3>
-                        <ul class="space-y-4 text-sm text-slate-700">
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-circle-check text-emerald-600 mt-1"></i>
-                                <div>
-                                    <strong class="text-slate-900">Biblioteca Digital con Facturas en Egresos:</strong>
-                                    <p class="text-xs text-slate-600 mt-0.5">Almacenamiento en la nube integrando facturas digitales directamente a cada egreso para revisión transparente del Comité y copropietarios.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-circle-check text-emerald-600 mt-1"></i>
-                                <div>
-                                    <strong class="text-slate-900">Asesoría Legal e Integración Previred:</strong>
-                                    <p class="text-xs text-slate-600 mt-0.5">Asistencia de abogados especializados para actualizar el Reglamento Interno y contratos del personal de conserjería, más la gestión previsional centralizada.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-circle-check text-emerald-600 mt-1"></i>
-                                <div>
-                                    <strong class="text-slate-900">Gestión de Encomiendas y Reserva de Espacios:</strong>
-                                    <p class="text-xs text-slate-600 mt-0.5">Avisos automáticos de correspondencia al celular de los residentes y automatización de reservas de quinchos o salas con cobro al gasto común.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+        <!-- Diagnostic Card -->
+        <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h2 class="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
+                Diagnóstico de Gestión e Información
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6 text-sm">
+                <div class="space-y-2">
+                    <p class="font-semibold text-slate-700">Riesgo en el manejo de la información:</p>
+                    <p class="text-slate-600">Mantener respaldos en pendrives o cuentas de correo personal es una práctica obsoleta como sistema primario. La información contable, jurídica y operativa de la comunidad debe estar centralizada en la nube de la plataforma contratada.</p>
+                </div>
+                <div class="space-y-2">
+                    <p class="font-semibold text-slate-700">Responsabilidad de la Administración:</p>
+                    <p class="text-slate-600">Es responsabilidad técnica de la administración aconsejar y guiar a la comunidad en el uso eficiente de las herramientas contratadas, lo cual constituye el estándar y conocimiento básico en la gestión de condominios.</p>
                 </div>
             </div>
         </section>
 
-        <!-- PESTAÑA 2: AUDITORÍA DE 10 MÓDULOS -->
-        <section id="tab-modulos" class="tab-content hidden space-y-8">
-            <div class="bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-200">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                    <div>
-                        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-3">
-                            <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center text-base font-extrabold">2</span>
-                            Auditoría de 10 Módulos Desaprovechados
-                        </h2>
-                        <p class="text-slate-600 text-sm mt-1">
-                            Herramientas del Plan Standard financiadas mediante los <strong>$82.315 CLP/mes</strong>. Puedes hacer clic en las casillas para simular la activación y actualizar el porcentaje de adopción.
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-2 bg-slate-100 p-2.5 rounded-xl text-xs font-semibold text-slate-700">
-                        <span>Adopción calculada:</span>
-                        <span id="interactiveUsageBadge" class="px-2.5 py-1 bg-amber-500 text-white rounded-lg font-bold">20%</span>
-                    </div>
+        <!-- Unused Modules Audit -->
+        <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Auditoría de Módulos Desaprovechados</h2>
+                    <p class="text-xs text-slate-500">Servicios estándar pagados en ComunidadFeliz no utilizados en la gestión diaria</p>
+                </div>
+                <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full">Subaprovechamiento ~80%</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <!-- Group 1 -->
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <h3 class="font-bold text-xs uppercase tracking-wider text-slate-500 mb-3 border-b border-slate-200 pb-2">Finanzas y Resguardo Legal</h3>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <strong class="block text-slate-800">Asesoría Legal Especializada (Ley 21.442)</strong>
+                                <span class="text-slate-500">Consultas ilimitadas con abogados expertos para Reglamento Interno y contratos de personal.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <strong class="block text-slate-800">Gestión de Remuneraciones y Previred</strong>
+                                <span class="text-slate-500">Emisión de liquidaciones de sueldo y pago o tramitación de cotizaciones previsionales.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <strong class="block text-slate-800">Conciliación Bancaria Automática</strong>
+                                <span class="text-slate-500">Cruce directo con cartola bancaria para automatizar la recepción de transferencias.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <strong class="block text-slate-800">Módulo Convenios de Pago Morosos</strong>
+                                <span class="text-slate-500">Acuerdos formalizados según Art. 6 Ley 21.442 congelando intereses.</span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
-                <!-- DESTACADO: LEGAL + PREVIRED -->
-                <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-6 text-white mb-8 border border-slate-700 shadow-xl relative overflow-hidden">
-                    <div class="absolute right-0 bottom-0 text-slate-700/20 text-9xl pointer-events-none transform translate-x-6 translate-y-6">
-                        <i class="fa-solid fa-scale-balanced"></i>
-                    </div>
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase mb-3 border border-emerald-500/30">
-                            <i class="fa-solid fa-star"></i> Servicios Prioritarios Incluidos
-                        </div>
-                        <h3 class="text-xl font-extrabold text-white mb-2">
-                            Asesoría Legal Especializada e Integración Previred
-                        </h3>
-                        <p class="text-slate-300 text-sm leading-relaxed max-w-3xl mb-4">
-                            ComunidadFeliz incluye asesoramiento de abogados especialistas en copropiedad inmobiliaria sin costos adicionales. Es prioritario activar este servicio para proteger a la comunidad:
-                        </p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                            <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
-                                <strong class="text-emerald-400 text-sm block mb-1">
-                                    <i class="fa-solid fa-book-bookmark"></i> Reglamento Interno
-                                </strong>
-                                Actualización y ajuste del Reglamento Interno a las disposiciones vigentes de la Ley 21.442.
+                <!-- Group 2 -->
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <h3 class="font-bold text-xs uppercase tracking-wider text-slate-500 mb-3 border-b border-slate-200 pb-2">Operación y Documentación</h3>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <strong class="block text-slate-800">Biblioteca Documental Digital</strong>
+                                <span class="text-slate-500">Repositorio de contratos, pólizas y facturas adjuntas electrónicamente a cada egreso.</span>
                             </div>
-                            <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
-                                <strong class="text-emerald-400 text-sm block mb-1">
-                                    <i class="fa-solid fa-user-shield"></i> Contratos de Personal
-                                </strong>
-                                Asistencia jurídica para amonestaciones, anexos, finiquitos y mediación en disputas laborales con conserjes y aseo.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <strong class="block text-slate-800">Recepción Digital de Encomiendas</strong>
+                                <span class="text-slate-500">Notificación automática al residente cuando la conserjería recibe un paquete.</span>
                             </div>
-                            <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
-                                <strong class="text-emerald-400 text-sm block mb-1">
-                                    <i class="fa-solid fa-file-invoice-dollar"></i> Conexión Previred
-                                </strong>
-                                Pago online directo o centralización de cotizaciones previsionales sin depender de planillas externas.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <strong class="block text-slate-800">Bitácora Digital e Incidencias</strong>
+                                <span class="text-slate-500">Registro de mantenimientos (ascensores, calderas, jardines) e informes de turnos.</span>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
 
-                <!-- CONTENEDOR DE CATEGORÍAS -->
-                <div class="space-y-6" id="modulesCategoriesContainer">
-                    <!-- Generado por JS -->
+                <!-- Group 3 -->
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <h3 class="font-bold text-xs uppercase tracking-wider text-slate-500 mb-3 border-b border-slate-200 pb-2">Comunicación y Participación</h3>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <strong class="block text-slate-800">Reserva Automática de Espacios Comunes</strong>
+                                <span class="text-slate-500">Agenda y cobro de quinchos o salas de eventos directamente desde la App.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <strong class="block text-slate-800">Muro Digital y Comunicados</strong>
+                                <span class="text-slate-500">Envío masivo de circulares por App/correo con confirmación de lectura.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <strong class="block text-slate-800">Votaciones y Consultas Telemáticas</strong>
+                                <span class="text-slate-500">Consultas en línea validadas jurídicamente para tomar decisiones comunitarias.</span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- PESTAÑA 3: CUMPLIMIENTO LEY 21.442 -->
-        <section id="tab-normativa" class="tab-content hidden space-y-8">
-            <div class="bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-200">
-                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2 flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center text-base font-extrabold">3</span>
-                    Cumplimiento de la Ley de Copropiedad Inmobiliaria (Ley 21.442)
-                </h2>
-                <p class="text-slate-600 text-sm mb-6">
-                    Alineación de los procesos contables y operativos con el marco regulatorio oficial en Chile.
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center text-xl mb-4 font-bold">
-                            <i class="fa-solid fa-folder-open"></i>
+        <!-- Financial Calculator & Loss Projection -->
+        <section class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-lg font-bold text-slate-900 mb-4">Calculadora de Desperdicio por Subuso</h2>
+                <div class="space-y-4 text-sm">
+                    <div class="p-4 bg-slate-50 rounded-lg space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-slate-600">Suscripción Mensual:</span>
+                            <span class="font-bold text-slate-900">$82.315 CLP</span>
                         </div>
-                        <h3 class="font-bold text-slate-900 text-base mb-2">Art. 20 – Transparencia de Cuentas</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                            Exige disponibilidad continua de respaldos contables para los 99 copropietarios.
-                        </p>
-                        <div class="text-xs bg-amber-50 text-amber-800 p-3 rounded-xl border border-amber-200">
-                            <strong>Brecha Actual:</strong> Los respaldos almacenados en pendrives o correos Gmail personales no ofrecen un repositorio oficial auditable.
+                        <div class="flex justify-between">
+                            <span class="text-slate-600">Gasto Anual acumulado:</span>
+                            <span class="font-bold text-slate-900">$987.780 CLP</span>
+                        </div>
+                        <div class="flex justify-between text-amber-700">
+                            <span>Desperdicio Estimado (80% sin uso):</span>
+                            <span class="font-bold">$790.224 CLP / año</span>
                         </div>
                     </div>
-
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-xl mb-4 font-bold">
-                            <i class="fa-solid fa-people-roof"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-900 text-base mb-2">Resguardo Laboral y Previred</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                            Garantizar la acreditación de cotizaciones e impuestos del personal contratado.
-                        </p>
-                        <div class="text-xs bg-emerald-50 text-emerald-900 p-3 rounded-xl border border-emerald-200">
-                            <strong>Solución Standard:</strong> La conexión con Previred centraliza liquidaciones y pagos de imposiciones en una sola plataforma.
-                        </div>
+                    <div class="p-4 bg-red-50 text-red-900 rounded-lg border border-red-200 text-xs">
+                        <strong>Impacto a 3 años:</strong> Mantener la operatividad manual genera un desperdicio acumulado de <strong class="text-red-700 font-bold">$2.370.672 CLP</strong> en recursos pagados que no se traducen en valor para el condominio.
                     </div>
+                </div>
+            </div>
 
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center text-xl mb-4 font-bold">
-                            <i class="fa-solid fa-bullhorn"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-900 text-base mb-2">Validez de Notificaciones</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                            Garantizar constancia formal de recepción de avisos, cobros y circulares.
-                        </p>
-                        <div class="text-xs bg-blue-50 text-blue-900 p-3 rounded-xl border border-blue-200">
-                            <strong>Solución Standard:</strong> El Muro Digital registra acuses de recibo y lectura por departamento sin la informalidad de WhatsApp.
-                        </div>
-                    </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 mb-2">Pérdida Acumulada Proyectada</h2>
+                    <p class="text-xs text-slate-500 mb-4">Comparativa de valor aprovechado vs. subaprovechado en el tiempo</p>
+                </div>
+                <div class="h-56 relative">
+                    <canvas id="lossChart"></canvas>
                 </div>
             </div>
         </section>
 
-        <!-- PESTAÑA 4: CALCULADORA FINANCIERA -->
-        <section id="tab-financiero" class="tab-content hidden space-y-8">
-            <div class="bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-200">
-                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2 flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center text-base font-extrabold">4</span>
-                    Calculadora Financiera de Proyección y Pérdida
-                </h2>
-                <p class="text-slate-600 text-sm mb-6">
-                    Ajusta los parámetros para evaluar el capital desaprovechado que podría permanecer en el <strong>Fondo de Reserva</strong> del edificio.
-                </p>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <!-- CONTROLES -->
-                    <div class="lg:col-span-5 space-y-6 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                        <div>
-                            <div class="flex justify-between text-sm font-bold text-slate-800 mb-2">
-                                <span>Horizonte Temporal de Proyección:</span>
-                                <span class="text-emerald-600 font-extrabold" id="yearsLabel">1 Año</span>
-                            </div>
-                            <input type="range" id="yearsSlider" min="1" max="5" step="1" value="1" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600">
-                            <div class="flex justify-between text-xs text-slate-400 mt-1">
-                                <span>1 año</span>
-                                <span>2 años</span>
-                                <span>3 años</span>
-                                <span>5 años</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between text-sm font-bold text-slate-800 mb-2">
-                                <span>Tasa de Adopción Real:</span>
-                                <span class="text-amber-600 font-extrabold" id="usageLabel">20%</span>
-                            </div>
-                            <input type="range" id="usageSlider" min="10" max="100" step="5" value="20" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500">
-                            <div class="flex justify-between text-xs text-slate-400 mt-1">
-                                <span>10% (Uso mínimo)</span>
-                                <span>50% (Parcial)</span>
-                                <span>100% (Standard total)</span>
-                            </div>
-                        </div>
-
-                        <div class="border-t border-slate-200 pt-4 space-y-3">
-                            <div class="flex justify-between items-center text-sm">
-                                <span class="text-slate-600">Inversión acumulada total:</span>
-                                <span class="font-bold text-slate-900" id="calcTotalPaid">$987.780</span>
-                            </div>
-                            <div class="flex justify-between items-center text-sm">
-                                <span class="text-slate-600">Valor aprovechado:</span>
-                                <span class="font-bold text-emerald-600" id="calcUtilized">$197.556</span>
-                            </div>
-                            <div class="flex justify-between items-center text-base p-3 bg-rose-50 rounded-xl text-rose-900 border border-rose-200">
-                                <span class="font-bold">Recursos no utilizados (Desperdicio):</span>
-                                <span class="font-extrabold text-rose-600 text-lg" id="calcLoss">$790.224</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- GRÁFICO CHART.JS -->
-                    <div class="lg:col-span-7 bg-slate-900 p-6 rounded-2xl border border-slate-800 text-white flex flex-col items-center justify-center relative min-h-[320px]">
-                        <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 text-center">
-                            Proporción del Presupuesto ($82.315 / mes)
-                        </h4>
-                        <div class="w-full max-w-md h-64 relative">
-                            <canvas id="financialChart"></canvas>
-                        </div>
-                    </div>
+        <!-- Roadmap -->
+        <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h2 class="text-lg font-bold text-slate-900 mb-6">Plan de Adopción Estándar (Hoja de Ruta)</h2>
+            <div class="grid md:grid-cols-3 gap-6 relative">
+                <div class="p-4 border-l-4 border-blue-600 bg-blue-50/50 rounded-r-lg">
+                    <span class="text-xs font-bold text-blue-600 uppercase">Etapa 1</span>
+                    <h3 class="font-bold text-slate-900 text-sm mt-1">Migración Documental</h3>
+                    <p class="text-xs text-slate-600 mt-2">Carga masiva de contratos, reglamentos y respaldos financieros del pendrive a la Biblioteca Digital de ComunidadFeliz.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- PESTAÑA 5: HOJA DE RUTA POR ETAPAS -->
-        <section id="tab-hoja-ruta" class="tab-content hidden space-y-8">
-            <div class="bg-white rounded-2xl p-6 sm:p-8 card-shadow border border-slate-200">
-                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2 flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center text-base font-extrabold">5</span>
-                    Hoja de Ruta por Etapas (Plan de Acción)
-                </h2>
-                <p class="text-slate-600 text-sm mb-8">
-                    Fases temáticas estructuradas para adoptar la plataforma de forma ordenada y sin afectar el cobro mensual del condominio.
-                </p>
-
-                <div class="relative border-l-2 border-slate-200 ml-4 sm:ml-8 space-y-8 pb-4">
-
-                    <!-- ETAPA 1 -->
-                    <div class="relative pl-6 sm:pl-8">
-                        <span class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold ring-4 ring-white shadow">
-                            E1
-                        </span>
-                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
-                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Etapa 1 • Migración Documental y Resguardo en la Nube</span>
-                            <h3 class="text-lg font-bold text-slate-900 mt-1 mb-2">Centralización de Archivos e Integración Tributaria</h3>
-                            <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-500"></i> Traspasar antecedentes contables del pendrive/Drive al repositorio digital de ComunidadFeliz.</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-500"></i> Mantener el pendrive únicamente como copia de respaldo física secundaria fuera de línea.</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-emerald-500"></i> Adjuntar las facturas de proveedores (ej. mantención de jardines) a los egresos del gasto común mensual.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- ETAPA 2 -->
-                    <div class="relative pl-6 sm:pl-8">
-                        <span class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold ring-4 ring-white shadow">
-                            E2
-                        </span>
-                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
-                            <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Etapa 2 • Activación Legal y Previred</span>
-                            <h3 class="text-lg font-bold text-slate-900 mt-1 mb-2">Cobertura Jurídica y Gestión Remuneracional</h3>
-                            <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i> Solicitar la asesoría legal del software para actualizar el Reglamento Interno según la Ley 21.442.</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i> Revisar la situación laboral del personal de conserjería con el equipo de abogados de la plataforma.</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-blue-500"></i> Conectar el sistema con Previred para pago online directo o emisión centralizada de liquidaciones.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- ETAPA 3 -->
-                    <div class="relative pl-6 sm:pl-8">
-                        <span class="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold ring-4 ring-white shadow">
-                            E3
-                        </span>
-                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
-                            <span class="text-xs font-bold uppercase tracking-wider text-purple-600">Etapa 3 • Centralización Notificatoria e Integración Operativa</span>
-                            <h3 class="text-lg font-bold text-slate-900 mt-1 mb-2">Canales Oficiales y Servicios Digitales</h3>
-                            <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-purple-500"></i> Activar la Recepción Digital de Encomiendas con notificación automática a los residentes.</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-purple-500"></i> Habilitar el módulo de Reserva de Espacios Comunes (quinchos/salas) con cobro al gasto común.</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-purple-500"></i> Difundir avisos y circulares exclusivamente por el Muro Digital y la aplicación de residentes.</li>
-                            </ul>
-                        </div>
-                    </div>
-
+                <div class="p-4 border-l-4 border-blue-600 bg-blue-50/50 rounded-r-lg">
+                    <span class="text-xs font-bold text-blue-600 uppercase">Etapa 2</span>
+                    <h3 class="font-bold text-slate-900 text-sm mt-1">Activación Legal y Previred</h3>
+                    <p class="text-xs text-slate-600 mt-2">Conexión directa con Previred para cotizaciones previsionales y revisión de contratos del personal con la asesoría jurídica ilimitada.</p>
+                </div>
+                <div class="p-4 border-l-4 border-blue-600 bg-blue-50/50 rounded-r-lg">
+                    <span class="text-xs font-bold text-blue-600 uppercase">Etapa 3</span>
+                    <h3 class="font-bold text-slate-900 text-sm mt-1">Centralización Notificatoria</h3>
+                    <p class="text-xs text-slate-600 mt-2">Canalización formal de circulares mediante Muro Digital, registro de encomiendas y reservas de espacios comunes vía App.</p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- PIE DE PÁGINA -->
-    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs text-center">
-        <div class="max-w-7xl mx-auto px-4">
-            <p class="font-medium text-slate-300">Edificio Las Verbenas #8591 — Comité de Administración</p>
-            <p class="mt-1 text-slate-500">Plan de adopción standard de la plataforma “Comunidad Feliz” • Ley 21.442</p>
-        </div>
+    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs border-t border-slate-800">
+        <p>Edificio Las Verbenas #8591 — Informe de Optimización Digital de Copropiedad</p>
     </footer>
 
-    <!-- MODAL SOLICITUD FORMAL -->
-    <div id="modalNotificacion" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative">
-            <button onclick="closeModal('modalNotificacion')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 class="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
-                <i class="fa-solid fa-paper-plane text-emerald-600"></i> Solicitud Formal de Adopción Standard
-            </h3>
-            <p class="text-xs text-slate-500 mb-4">Texto editable para enviar formalmente a la administración del edificio.</p>
-            
-            <textarea id="emailTextarea" readonly class="w-full h-64 p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 font-mono leading-relaxed focus:outline-none custom-scrollbar">Estimada Administración,
-
-Junto con saludar, nos dirigimos a usted en representación del Comité de Administración del Edificio Las Verbenas #8591 (99 Unidades).
-
-Revisando el presupuesto anual del condominio, constatamos que se cancelan $82.315 CLP mensuales ($987.780 CLP al año) por el software ComunidadFeliz, del cual actualmente solo se utiliza cerca de un 20%. Entendemos que es responsabilidad técnica de la administración actual aconsejar y guiar a la comunidad en la adopción eficiente de esta herramienta, lo cual constituye un conocimiento estándar básico en la gestión actual de edificios.
-
-Con el fin de resguardar la transparencia y cumplir con la Ley N° 21.442, solicitamos formalmente iniciar el Plan de Adopción Standard para:
-
-1. Migrar la documentación contable desde el pendrive/Drive a la Biblioteca Digital oficial en la nube.
-2. Adjuntar los respaldos tributarios y facturas (ej. mantención de jardines) a cada egreso del gasto común.
-3. Activar el módulo de Asesoría Legal Especializada e Ilimitada para actualizar el Reglamento Interno y solucionar contratos del personal.
-4. Conectar Previred para el pago online directo o centralización de cotizaciones previsionales.
-5. Habilitar la Recepción Digital de Encomiendas y la Reserva de Espacios Comunes desde la aplicación.
-
-Quedamos a la espera de su confirmación para coordinar el plan de implementación.
-
-Atentamente,
-Comité de Administración
-Edificio Las Verbenas #8591</textarea>
-            
-            <div class="mt-4 flex justify-end gap-3">
-                <button onclick="closeModal('modalNotificacion')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">
-                    Cerrar
-                </button>
-                <button onclick="copyEmailText()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold flex items-center gap-2 shadow">
-                    <i class="fa-solid fa-copy"></i> Copiar Texto
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT DE LÓGICA E INTERACCIÓN -->
     <script>
-        const categoriesData = [
-            {
-                name: "Finanzas y Resguardo Legal",
-                modules: [
-                    { id: 1, name: "Asesoría Legal Ilimitada (Ley 21.442)", desc: "Soporte jurídico sin costo extra para Reglamento Interno y disputas contractuales con colaboradores internos (conserjes, aseo).", critical: true, active: false },
-                    { id: 2, name: "Gestión de Remuneraciones y Previred", desc: "Emisión de liquidaciones y conexión directa para pago online o centralización de cotizaciones en ComunidadFeliz.", critical: true, active: false },
-                    { id: 3, name: "Conciliación Bancaria Automática", desc: "Sincronización con la cartola bancaria para conciliar depósitos de los 99 departamentos.", critical: false, active: false },
-                    { id: 4, name: "Módulo de Convenios con Morosos", desc: "Acuerdos formales de pago según el Art. 6 de la Ley 21.442.", critical: false, active: false }
-                ]
-            },
-            {
-                name: "Operación y Gestión Documental",
-                modules: [
-                    { id: 5, name: "Biblioteca Documental Digital", desc: "Almacenamiento seguro de contratos, pólizas y vinculación directa de facturas a los egresos del gasto común mensual.", critical: false, active: false },
-                    { id: 6, name: "Bitácora Digital e Incidencias", desc: "Registro formal de mantenimientos (ascensores, calderas, jardines) e informes de turno.", critical: false, active: false },
-                    { id: 7, name: "Recepción Digital de Encomiendas", desc: "El conserje registra el paquete en la plataforma y el sistema le envía una notificación automática al departamento correspondiente.", critical: false, active: false },
-                    { id: 8, name: "Reserva de Espacios Comunes", desc: "Permite que los residentes agenden y paguen el uso de quinchos o salas de eventos desde la App, sumando el cobro automáticamente al gasto común.", critical: false, active: false }
-                ]
-            },
-            {
-                name: "Comunicación y Participación",
-                modules: [
-                    { id: 9, name: "Muro Digital y Comunicados Oficiales", desc: "Circulares por app/correo con confirmación de lectura para sustituir notificaciones informales por WhatsApp.", critical: false, active: false },
-                    { id: 10, name: "Votaciones y Consultas Telemáticas", desc: "Votaciones en línea respaldadas legalmente entre asambleas presenciales.", critical: false, active: false }
-                ]
-            }
-        ];
-
-        let financialChartInstance = null;
-        const MONTHLY_COST = 82315;
-
-        window.onload = function() {
-            renderModules();
-            initChart();
-            setupSliders();
-        };
-
-        function renderModules() {
-            const container = document.getElementById('modulesCategoriesContainer');
-            container.innerHTML = '';
-
-            categoriesData.forEach(cat => {
-                const catWrapper = document.createElement('div');
-                catWrapper.className = "bg-slate-50 p-5 rounded-2xl border border-slate-200";
-
-                const catTitle = document.createElement('h3');
-                catTitle.className = "text-base font-bold text-slate-800 mb-3 pb-2 border-b border-slate-200 flex items-center gap-2";
-                catTitle.innerHTML = `<i class="fa-solid fa-folder text-emerald-600"></i> ${cat.name}`;
-                catWrapper.appendChild(catTitle);
-
-                const list = document.createElement('div');
-                list.className = "space-y-3";
-
-                cat.modules.forEach(mod => {
-                    const item = document.createElement('div');
-                    item.className = `p-4 rounded-xl border transition flex items-start sm:items-center justify-between gap-4 ${
-                        mod.active 
-                            ? 'bg-emerald-50/80 border-emerald-300' 
-                            : (mod.critical ? 'bg-slate-900 text-white border-slate-700' : 'bg-white border-slate-200')
-                    }`;
-
-                    item.innerHTML = `
-                        <div class="flex items-start gap-3">
-                            <input type="checkbox" id="mod-${mod.id}" ${mod.active ? 'checked' : ''} onchange="toggleModule(${mod.id})" 
-                                class="mt-1 sm:mt-0 w-5 h-5 accent-emerald-600 rounded cursor-pointer">
-                            <div>
-                                <label for="mod-${mod.id}" class="font-bold text-sm cursor-pointer ${mod.critical && !mod.active ? 'text-emerald-400' : 'text-slate-900'}">
-                                    ${mod.name}
-                                    ${mod.critical ? '<span class="ml-2 text-[10px] bg-emerald-500 text-white px-2 py-0.5 rounded-full font-extrabold uppercase">Prioritario</span>' : ''}
-                                </label>
-                                <p class="text-xs ${mod.critical && !mod.active ? 'text-slate-300' : 'text-slate-500'} mt-0.5">${mod.desc}</p>
-                            </div>
-                        </div>
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-lg shrink-0 ${
-                            mod.active ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-700'
-                        }">
-                            ${mod.active ? 'En Uso' : 'Inactivo'}
-                        </span>
-                    `;
-                    list.appendChild(item);
-                });
-
-                catWrapper.appendChild(list);
-                container.appendChild(catWrapper);
-            });
-
-            updateUsageRate();
-        }
-
-        function toggleModule(id) {
-            categoriesData.forEach(cat => {
-                const mod = cat.modules.find(m => m.id === id);
-                if(mod) {
-                    mod.active = !mod.active;
-                }
-            });
-            renderModules();
-        }
-
-        function updateUsageRate() {
-            let totalModules = 0;
-            let activeModules = 0;
-
-            categoriesData.forEach(cat => {
-                cat.modules.forEach(m => {
-                    totalModules++;
-                    if(m.active) activeModules++;
-                });
-            });
-
-            const rate = Math.round((activeModules / totalModules) * 100);
-            const displayRate = rate === 0 ? 20 : rate;
-            
-            document.getElementById('interactiveUsageBadge').innerText = displayRate + '%';
-            document.getElementById('kpiUsageRate').innerText = displayRate + '%';
-            
-            const usageSlider = document.getElementById('usageSlider');
-            if(usageSlider) {
-                usageSlider.value = displayRate;
-                updateCalculations();
-            }
-        }
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-slate-900', 'text-white', 'shadow-sm');
-                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
-            });
-
-            document.getElementById(tabId).classList.remove('hidden');
-            const activeBtn = document.getElementById('btn-' + tabId);
-            activeBtn.classList.add('bg-slate-900', 'text-white', 'shadow-sm');
-            activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
-        }
-
-        function setupSliders() {
-            const yearsSlider = document.getElementById('yearsSlider');
-            const usageSlider = document.getElementById('usageSlider');
-
-            yearsSlider.addEventListener('input', updateCalculations);
-            usageSlider.addEventListener('input', updateCalculations);
-
-            updateCalculations();
-        }
-
-        function updateCalculations() {
-            const years = parseInt(document.getElementById('yearsSlider').value);
-            const usagePercent = parseInt(document.getElementById('usageSlider').value);
-
-            document.getElementById('yearsLabel').innerText = years + (years === 1 ? ' Año' : ' Años');
-            document.getElementById('usageLabel').innerText = usagePercent + '%';
-
-            const totalPaid = MONTHLY_COST * 12 * years;
-            const utilized = Math.round(totalPaid * (usagePercent / 100));
-            const loss = totalPaid - utilized;
-
-            document.getElementById('calcTotalPaid').innerText = '$' + totalPaid.toLocaleString('es-CL');
-            document.getElementById('calcUtilized').innerText = '$' + utilized.toLocaleString('es-CL');
-            document.getElementById('calcLoss').innerText = '$' + loss.toLocaleString('es-CL');
-
-            document.getElementById('kpiAnnualLoss').innerText = '$' + (MONTHLY_COST * 12 * 0.8).toLocaleString('es-CL');
-
-            updateChart(utilized, loss);
-        }
-
-        function initChart() {
-            const ctx = document.getElementById('financialChart').getContext('2d');
-            financialChartInstance = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Valor Aprovechado', 'Recursos No Utilizados'],
-                    datasets: [{
-                        data: [197556, 790224],
-                        backgroundColor: ['#10b981', '#ef4444'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { color: '#cbd5e1', font: { family: 'Inter', size: 12 } }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let val = context.raw || 0;
-                                    return context.label + ': $' + val.toLocaleString('es-CL') + ' CLP';
-                                }
-                            }
-                        }
+        const ctx = document.getElementById('lossChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Año 1', 'Año 2', 'Año 3'],
+                datasets: [
+                    {
+                        label: 'Valor Aprovechado (20%)',
+                        data: [197556, 395112, 592668],
+                        backgroundColor: '#3b82f6'
                     },
-                    cutout: '70%'
+                    {
+                        label: 'Desperdicio por Subuso (80%)',
+                        data: [790224, 1580448, 2370672],
+                        backgroundColor: '#ef4444'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, ticks: { callback: value => '$' + value.toLocaleString('es-CL') } }
+                },
+                plugins: {
+                    legend: { position: 'bottom' }
                 }
-            });
-        }
-
-        function updateChart(utilized, loss) {
-            if(financialChartInstance) {
-                financialChartInstance.data.datasets[0].data = [utilized, loss];
-                financialChartInstance.update();
             }
-        }
-
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
-
-        function copyEmailText() {
-            const textarea = document.getElementById('emailTextarea');
-            textarea.select();
-            document.execCommand('copy');
-            
-            const btn = event.currentTarget;
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Copiado!';
-            btn.classList.remove('bg-emerald-600');
-            btn.classList.add('bg-slate-800');
-            
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.classList.remove('bg-slate-800');
-                btn.classList.add('bg-emerald-600');
-            }, 2000);
-        }
+        });
     </script>
 </body>
 </html>
